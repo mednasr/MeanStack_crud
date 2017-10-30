@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <button type="button" ng-click="$dismiss()" class="close">&times;</button>
+  <h4 ng-if="options.title" ng-bind="options.title" class="modal-title"></h4>
+</div>
+
+<form name="Myform" class="form-horizontal" data-toggle="validator" role="form">
+  <div class="modal-body">
+    <div class="form-group">
+      <p ng-if="options.body" ng-bind="options.body"></p>
+      <div class="form-group" ng-if="options.columns">
+        <label class="col-sm-3 control-label no-padding-right">{{i.heading | labelCase}}</label>
+        <div class="col-sm-7">
+          <br class="block input-icon input-icon-right">
+          <input type="text" class="form-control" name="name"
+                 ng-disabled="i.heading=='_id' || (i.heading==options.disabledColumn && options.title==='Add New')"
+                 autofocus="i.heading=='name'" placeholder="{{i.heading | labelCase}}" ng-if="i.sortType==='parseFloat'"
+                 only-numbers>
+          <label class="col-sm-12 alert-info" style="vertical-align: middle;"> Last name </label>
+          <input type="text" class="form-control" name="name" ng-model="data.firstName" placeholder="Last Name"
+                 ng-if="i.sortType!=='parseFloat' && i.dataType!=='boolean'" required>
+          </br><label class="col-sm-12 alert-info">First Name </label>
+          <input type="text" class="form-control" name="name" ng-model="data.lastName" placeholder="First Name"
+                 ng-if="i.sortType!=='parseFloat' && i.dataType!=='boolean'" required>
+          </br>  <label class="col-sm-12 alert-info"> Age </label>
+          <input type="text" class="form-control" name="name" ng-model="data.age" placeholder="Age"
+                 ng-if="i.sortType!=='parseFloat' && i.dataType!=='boolean'" required>
+          </br> <label class="col-sm-12 alert-info"> Street </label>
+          <input type="text" class="form-control" name="name" ng-model="data.address.street" placeholder="Street"
+                 ng-if="i.sortType!=='parseFloat' && i.dataType!=='boolean'" required>
+          </br><label class="col-sm-12 alert-info"> Street name </label>
+          <input type="text" class="form-control" name="name" ng-model="data.address.street_name"
+                 placeholder="Street Name" ng-if="i.sortType!=='parseFloat' && i.dataType!=='boolean'" required>
+          </br>  <label class="col-sm-12 alert-info"> Country </label>
+          <select name="paymentMethod" ng-model="data.country" value="option.name" class="form-control" required
+                  ng-options="option.name for option in countries" class="form-control">
+          </select>
+          </span>
+          </br>
+          </br>
+          <label class="col-sm-12 alert-success"> You need to fill all of you information in order to add a
+            contact </label>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+
+    <!-- <button ng-repeat="button in options.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button> -->
+    <button type="button" class="btn" ng-click="cancel();">Cancel</button>
+    <button class="btn btn-primary" ng-disabled="Myform.$invalid" ng-click="saveItem(data);" type="submit">Save</button>
+  </div>
+</form>

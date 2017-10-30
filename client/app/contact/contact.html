@@ -1,0 +1,31 @@
+<div class="col-md-12" style="margin-left: 9.5%">
+  <div class="row">
+    <div class="box">
+      <h3>Technical Test</h3>
+      <div class="alert-info">Using a RESTful micro-service architecture, create a web page with :</div>
+      </br>1. A list of contact (firstname | lastname | age)
+      </br>2. A contact can be added to the list
+      </br>3. A contact can be remove from the list
+      </br>4. Once the contact is selected, you can edit his detail (including the address)
+      </br>5. The address must have at least the street #, street name and a city
+      </br>6. The city must be chosen from a list receive by the address service
+      </br> </br>
+      <div class="alert-info"> You must have 3 services (app):</div>
+      </br> 1. Front-end (UI)
+      </br> 2. Contact
+      </br> 3. Address
+      </br>
+      </br style="background-color: #ebebeb">- The UI service must call both the Contact and Address service to render
+      the page.
+      </br style="background-color: #ebebeb">- The Contact service must call the Address service to get the address
+      detail of a contact.
+      </br style="background-color: #ebebeb">- Contact and Address must use a RESTful architecture.
+      </br style="background-color: #ebebeb">- The address service must provide a list of cities.
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-12" style="margin-right: 500px">
+  <crud-med api='Contact' cols='[{"lastName":"text"},{"firstName":"text"},{"age":"text"},{ "address" :" Object"}]'></crud-med>
+</div>

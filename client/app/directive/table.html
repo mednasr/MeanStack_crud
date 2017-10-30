@@ -1,0 +1,163 @@
+<link rel="stylesheet" href="../../bower_components/angular-tablesort/mdb.css"/>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+
+<div class="table table-hover" style="width: 120%">
+  <div class="panel panel-primary">
+    <div class="panel-heading">List of Contacts : {{title}}
+
+      <div class="sw-search" style="background-color: transparent">
+        <div class="nav-search" id="nav-search">
+                          <span class="input-icon">
+                              <input placeholder="Filter list ..." class="nav-search-input" ng-model="filter"
+                                     autocomplete="off" type="text" style="width:300px;" autofocus>
+                              <i class="search-icon fa fa-search nav-search-icon"></i>
+                          </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-footer" style="background-color: transparent">
+      <div class="row" style="background-color: transparent">
+        <div class="col-xs-12" dw-loading="crudMed" dw-loading-options="{text: ''}">
+          <button type="button" class="btn btn-danger" ng-click="edit({});" ng-if="!noadd">Add New <i
+            class="fa fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body" style="background-color: transparent">
+      <table class="table table-striped" ts-wrapper>
+        <thead>
+        <tr>
+          <th>#</th>
+          <th ts-criteria="{{c.sortType}}">
+            First Name
+          </th>
+          <th ts-criteria="{{c.sortType}}">
+            Last Name
+          </th>
+          <th ts-criteria="{{c.sortType}}">
+            Age
+          </th>
+          <th ts-criteria="{{c.sortType}}">
+            Country
+          </th>
+
+          <th>Edit / Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- <i class="fa fa-cog fa-spin fa-2x" ng-if="loadingTable"></i> -->
+        <tr ng-repeat="p in data.slice().reverse() | filter:filter track by p._id" id="{{p._id}}" ts-repeat>
+          <td ng-switch="c.dataType">
+                      <span ng-switch-when="boolean">
+                        <button class="btn" ng-class="{true:'btn-danger', false:''}[p[c.heading]]"
+                                ng-click="changeActive(p);">{{p.active | active}}</button>
+                      </span>
+            <span ng-switch-default>
+                       {{$index+1}}
+                      </span>
+          </td>
+          <td ng-switch="c.dataType">
+                      <span ng-switch-when="boolean">
+                        <button class="btn" ng-class="{true:'btn-danger', false:''}[p[c.heading]]"
+                                ng-click="changeActive(p);">{{p.active | active}}</button>
+                      </span>
+            <span ng-switch-default required="">
+                        <!--{{p[c.heading].lastName}}-->
+                                          {{p.lastName}}
+
+                      </span>
+          </td>
+          <td ng-switch="c.dataType">
+                      <span ng-switch-when="boolean">
+                        <button class="btn" ng-class="{true:'btn-danger', false:''}[p[c.heading]]"
+                                ng-click="changeActive(p);">{{p.active | active}}</button>
+                      </span>
+            <span ng-switch-default>
+                        <!--{{p[c.heading].lastName}}-->
+
+                              {{p.firstName}}
+
+                      </span>
+          </td>
+          <td ng-switch="c.dataType">
+                      <span ng-switch-when="boolean">
+                        <button class="btn" ng-class="{true:'btn-danger', false:''}[p[c.heading]]"
+                                ng-click="changeActive(p);">{{p.active | active}}</button>
+                      </span>
+            <span ng-switch-default>
+                        <!--{{p[c.heading].lastName}}-->
+
+                             {{p.age}}
+
+                      </span>
+          </td>
+          <td ng-switch="c.dataType">
+                      <span ng-switch-when="boolean">
+                        <button class="btn" ng-class="{true:'btn-danger', false:''}[p[c.heading]]"
+                                ng-click="changeActive(p);">{{p.active | active}}</button>
+                      </span>
+            <span ng-switch-default>
+                        <!--{{p[c.heading].lastName}}-->
+
+                             {{p.country.name}}
+
+                      </span>
+          </td>
+          <td>
+            <div>
+              <a class="teal-text" ng-click="changeActivePatient(p);" data-toggle="modal" data-target="#patient-info"><i
+                class="fa fa-info-circle" aria-hidden="true"></i></a>
+
+              <a class="teal-text" ng-click="edit(p);" ng-if="!noedit"><i class="fa fa-pencil"></i></a>
+              <a class="red-text" ng-confirm-message="Are you sure to delete?" ng-confirm-click="delete(p)" item="p"
+                 ng-if="!nodelete"><i class="fa fa-times"></i></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" id="patient-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- more usage of angular data binding -->
+          <h2>{{activePatient.lastName}}</h2>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <!-- ng-src used again instead of src -->
+              <img ng-src="assets/img/contact.png" class="img-rounded img-responsive">
+
+            </div>
+          </div>
+          <div class="row top-buffer">
+            <div class="col-md-6">
+              <!-- angular data binding -->
+              <p><strong>First Name : </strong>{{activePatient.lastName}}</p>
+              <p><strong>Last Name : </strong>{{activePatient.firstName}}</p>
+              <p><strong>Age : </strong>{{activePatient.age}}</p>
+              <p><strong>Street : </strong>{{activePatient.address.street}}</p>
+              <p><strong>Street Name : </strong>{{activePatient.address.street_name}}</p>
+              <p><strong>City : </strong>{{activePatient.country.name}}</p>
+
+            </div>
+            <div class="col-xs-12 top-buffer">
+              <!-- angular data binding and data-dismiss for bootstrap -->
+              <button class="btn btn-danger pull-right"
+                      data-dismiss="modal">Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
