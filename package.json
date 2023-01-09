@@ -36,7 +36,7 @@
     "jsonwebtoken": "^5.0.0",
     "lodash": "~2.4.1",
     "method-override": "~1.0.0",
-    "mongoose": "~4.0.3",
+    "mongoose": "~5.2.6",
     "morgan": "~1.0.0",
     "passport": "~0.2.0",
     "passport-facebook": "latest",
@@ -45,8 +45,8 @@
     "passport-twitter": "latest",
     "serve-favicon": "~2.0.1",
     "shortid": "^2.2.2",
-    "socket.io": "^1.0.6",
-    "socket.io-client": "^1.0.6",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0",
     "socketio-jwt": "^3.0.0"
   },
   "devDependencies": {
